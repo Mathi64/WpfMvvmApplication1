@@ -76,6 +76,10 @@ namespace WpfMvvmApplication1.Models
         /// </summary>
         public static ObservableCollection<Children> listChildren()
         {
+            
+            
+            
+            
             ObservableCollection<Children> allChildren = new ObservableCollection<Children>();
             var reader = readSQL(sSQLchildren);
             foreach (DataRow row in reader.Rows)

@@ -17,12 +17,25 @@
     <Viewbox Margin="0,8,0,8" DataContext="{Binding Source={StaticResource Windows1ViewModel}}" >
         <TabControl>
             <!--Children Tab-->
+            <TabItem Header="Présence">
+                <Grid Height="784" Width="1550">
+                    <StackPanel Orientation="Horizontal" Height="28"  HorizontalAlignment="Center" Margin="11,2,1,754" Width="1538">
+                        <Separator Height="6" Name="separator1" Width="706" Visibility="Hidden" />
+                        <Button Content="+" Width="30" />
+                    </StackPanel>
+                    <ComboBox HorizontalAlignment="Left" Margin="85,30,0,0" VerticalAlignment="Top" Width="234"/>
+                    <Label Content="Secteur" HorizontalAlignment="Left" Margin="22,30,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Groupe" HorizontalAlignment="Left" Margin="429,101,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
+            </TabItem>
+
             <TabItem Header="Enfants">
                 <Grid Height="784" Width="1550">
                     <StackPanel Orientation="Horizontal" Height="28"  HorizontalAlignment="Center" Margin="11,2,1,754" Width="1538">
                         <Label Content="Recherche :" />
-                        <TextBox Name="Recherche" Style="{StaticResource ResourceKey=flatTextBox}" Height="23" TextWrapping="Wrap" Text="TextBox" Width="716" />
-                        <Separator Height="6" Name="separator1" Width="706" Visibility="Hidden" />
+                        <TextBox Name="RechercheChildren" Style="{StaticResource ResourceKey=flatTextBox}" Height="23" TextWrapping="Wrap" Text="TextBox" Width="716" />
+                        <Separator Height="6" Name="separator1Children" Width="706" Visibility="Hidden" />
                         <Button Content="+" Width="30" />
                     </StackPanel>
 

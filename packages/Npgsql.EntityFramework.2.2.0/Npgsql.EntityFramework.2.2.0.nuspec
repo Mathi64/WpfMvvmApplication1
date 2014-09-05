@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Npgsql.EntityFramework</id>
+    <version>2.2.0</version>
+    <title>Npgsql for Entity Framework</title>
+    <authors>Francisco Figueiredo Jr.,  Josh Cooley,  Dave Page,  Jon Asher,  Brar Piening,  Chris Morgan,  Hiroshi Saito,  Jon Hanna,  Federico Di Gregorio,  Glen Parker,  Shay Rojansky</authors>
+    <owners>Francisco Figueiredo Jr.,  Josh Cooley,  Dave Page,  Jon Asher,  Brar Piening,  Chris Morgan,  Hiroshi Saito,  Jon Hanna,  Federico Di Gregorio,  Glen Parker,  Shay Rojansky</owners>
+    <licenseUrl>https://github.com/npgsql/Npgsql/wiki/License</licenseUrl>
+    <projectUrl>https://github.com/npgsql/Npgsql</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Postgresql provider for Entity Framework 6 and above</description>
+    <summary>Postgresql provider for Entity Framework 6 and above</summary>
+    <releaseNotes>This is Npgsql 2.2.0 Final Release (https://github.com/npgsql/Npgsql/releases/tag/v2.2.0)
+
+This release contains 249 commits since the last stable release. Includes bug fixes, improvements and new features.
+
+Update notice: If you have been using Npgsql 2.2.0-rc2, you don't need to update to this version. They are the same except for the Assembly version information.
+
+Major highlights
+================
+
+Visual Studio DDEX support
+==========================
+
+Kenji Uno added support for DDEX. Now you can use Npgsql with Visual Studio data designer. This is a missing feature a lot of our users requested in the past. Kenji added a tutorial about how to use Npgsql with DDEX. You can find it here: https://github.com/npgsql/Npgsql/wiki/Visual-Studio-Design-Time-Support---DDEX-Provider#install-npgsqlddexprovidervsix
+Entity Framework
+
+David Karlaš added support for EFMigration and Database creation in EF6+.
+Now it is possible to start Code First projects without needing to create a database upfront. EntityFramework and Npgsql will take care of it.
+Emil Lenngren added support for a lot of missing features of EntityFramework.
+
+A list containing fixes from David and Emil as well as others for EntityFramework can be seen here: https://github.com/npgsql/Npgsql/issues?direction=desc&amp;labels=entity+framework&amp;milestone=2&amp;page=1&amp;sort=created&amp;state=closed
+
+
+SSLStream support
+=================
+
+In this release, SSLStream is on by default.
+If you want to use Mono.Security, you will need to use the following line in your code:
+
+NpgsqlConnection.UseSslStream = false;
+
+Note that in future releases, this option may not be available anymore as we are removing the dependency on Mono.Security assembly. Let us know in the forums if you have any problem with ssl when using SSLStream. This will help us check if we will be able to remove Mono.Security assembly.
+
+
+Added support for JSON, JSONB and HSTORE datatypes
+==================================================
+
+Shay added support for those datatypes.
+
+
+
+Added GSSAPI support on Windows
+===============================
+
+Brian Crowell added support for GSSAPI on windows. Now it is easier to use Active Directory when authenticating users.
+
+
+
+Removed support for protocol v2
+===============================
+
+Postgresql versions which use only protocol 2 are very old and don't receive support from postgresql group anymore. By removing support for protocol version 2, we removed a lot of code and can focus on functionalities provided by protocol 3.
+Removed support for Postgresql 8.4 and below
+
+In this thread, we talked about making Npgsql support the officially supported postgresql versions. we talked about making Npgsql support the officially supported postgresql versions. Postgresql has a table of officially supported versions and we decided to follow this table to guide us which postgresql version we will have support to.
+
+This doesn't necessarily mean that Npgsql won't work on unsupported versions. It may work if we don't add any SQL or unsupported feature. For example, today Npgsql 2.2 works only on Postgresql 8.2 and above because we added server side support for command timeout handling and some other queries which aren't supported on earlier versions.
+
+If you are using earlier postgresql versions, please, use an older version of Npgsql. We are creating a compatibility table to show which Postgresql version Npgsql works with.
+
+
+Fixed bugs:
+===========
+
+[#91] Support for EFMigration and Database creation
+[#152] NpgsqlInterval different constructors different ToString
+[#158] NpgsqlCommand.Dispose() should execute "DEALLOCATE " for a prepared command
+[#177] XML data type doesn't seem to be quoting parameters properly on insert
+[#179] NpgsqlCommandBuilder automatic sql commands configuration
+[#188] Buffer too small problem in NpgsqlCopySerializer
+[#201] Dynamic type parameters: Cannot cast System.Int32 into any valid DbType after upgrading from 2.0.14.3 to 2.1.2.0
+[#208] ObjectDisposeException
+[#217] Impossible to insert a Double.NaN value
+[#219] [#1011005] using 2 NpgsqlCopyIn at the same time
+[#223] HasRows property's bug
+[#231] NpgsqlParameterCollection.Clear() doesn't reset NpgsqlParameter.Collection
+[#225] Handle IEnumerable parameter
+[#233] Cannot insert to tables which have only one column
+[#246] Take followed by Skip is generated incorrectly in Entity Framework
+[#262] FirstOrDefault() on navigation property subquery throws “Not Implemented” Exception
+[#264] Mono.Security is outdated
+[#269] Fix 's' value mapped to the 'a' byte
+[#280] Bad SQL produced when selecting a field that was also used in the orderBy of a let subquery
+[#287] Fix operator handling and date functions for EF
+[#296] parameter parsing fails (regression) and duplicate [#240] NpgSqlCommand does not substitute parameters when there is a string with escaped apostrophe
+[#315] Fix query parameter processing to more correctly match PostgreSQL's lexer
+
+A list of the issues and pull requests merged for this release can be found at github here: https://github.com/npgsql/Npgsql/issues?direction=desc&amp;milestone=2&amp;page=1&amp;sort=created&amp;state=closed
+
+
+Known Issues
+============
+
+There are some issues we are working for the next maintenance release 2.2.1. You can check which issues we are working on here: https://github.com/npgsql/Npgsql/issues?q=milestone%3A2.2.1
+
+
+Thanks
+======
+
+I'd like to give a special thanks to Kenji Uno for his excellent work with Npgsql DDEX support. DDEX support was one of the biggest missing features of Npgsql.
+
+I'd like to thank Emil Lenngren for all his work with Entity Framework improvements and insightful comments, David Karlaš for his help with Entity Framework support. Shay Rojansky, Glen Parker and Josh Cooley for all contributions and comments, and a big thanks to all the other contributors who helped us to make this release.
+
+
+List of contributors for this release
+=====================================
+
+Kenji Uno
+Shay Rojansky
+Glen Parker
+Emil Lenngren
+David Karlaš
+Brian Crowell
+danzel
+Tuan Nguyen
+windcloud
+asgeirh
+Frans Bouma
+Jaspalsinh Chauhan
+Josh Cooley
+Martin Willey
+Francisco Figueiredo Jr.
+shankbond
+Javier Torres
+Kevin Pullin
+Michael de Lang
+Oskar Gewalli
+Sunny Ahuwanya
+Thomas Radioyes
+javitonino
+mw
+samy</releaseNotes>
+    <copyright>Copyright 2002 - 2014 Npgsql Development Team</copyright>
+    <language>en-US</language>
+    <tags>Npgsql postgres data database Postgresql entity framework ef</tags>
+    <dependencies>
+      <dependency id="Npgsql" version="[2.2.0]" />
+      <dependency id="EntityFramework" version="6.0.0" />
+    </dependencies>
+  </metadata>
+</package>

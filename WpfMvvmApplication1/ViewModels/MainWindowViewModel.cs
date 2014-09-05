@@ -5,11 +5,46 @@ using System.Windows.Input;
 using Npgsql;
 using WpfMvvmApplication1.Helpers;
 using WpfMvvmApplication1.Models;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
+
+/*public class Childrens
+{
+    public int Id { get; set; }
+}*/
+
+public class Childrens
+{
+    public int Id { get; set; }
+    public string LastName { get; set; }
+
+}
+
+public class ChildrensContext : DbContext
+{
+
+    public ChildrensContext()
+        : base("name=ChildrensContext")
+    {
+    }
+
+    public DbSet<Childrens> Childrens { get; set; }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        // Map to the correct Chinook Database tables
+        modelBuilder.Entity<Childrens>().ToTable("Childrens", "public");
+        throw new UnintentionalCodeFirstException();
+
+    }
+}
 
 namespace WpfMvvmApplication1.ViewModels
 {
     internal class MainWindowViewModel : NotificationObject
     {
+
         #region Properties
 
         #region ChildrensCollection
@@ -89,6 +124,21 @@ namespace WpfMvvmApplication1.ViewModels
             //ChildrensCollection = new ChildrenCollection();
             ChildrensCollection = new ChildrenCollection {Collection = SQL.listChildren()};
             FamilyCollection = SQL.listFamilies();
+
+            using (var db = new ChildrensContext())
+            {
+                var artists = from a in db.Childrens
+                              where a.Name.StartsWith("ID")
+                              orderby a.Name
+                              select a;
+
+                foreach (var artist in artists)
+                {
+                    Console.WriteLine(artist.Name);
+                }
+            }
+            
+
         }
         #endregion
 
