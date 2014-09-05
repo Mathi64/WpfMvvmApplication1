@@ -13,5 +13,30 @@ namespace WpfMvvmApplication1.Views
             InitializeComponent();
         }
 
+        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void chkClinic_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbTel2_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
+
+        private void chkHospital_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void chkBoatOutings_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
